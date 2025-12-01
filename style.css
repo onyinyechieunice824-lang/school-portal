@@ -163,6 +163,10 @@ body {
   opacity: 0;
   transition: opacity 1.5s ease-in-out;
   animation: kenburns 20s ease-in-out infinite;
+  /* UPDATED: Brighter and sharper images */
+  filter: brightness(1.2) contrast(1.1) saturate(1.15);
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
 }
 
 .hero-slide.active {
@@ -187,7 +191,8 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(40, 40, 60, 0.7);
+  /* UPDATED: Lighter overlay for brighter images */
+  background: rgba(40, 40, 60, 0.4);
   z-index: 1;
 }
 
