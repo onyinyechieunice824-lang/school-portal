@@ -200,12 +200,12 @@ if (signinBtn) {
         showMessage('✓ Login successful! Redirecting...');
         
         setTimeout(() => {
-          window.location.href = `dashboard.html?role=${role}`;
+          window.location.href = `/dashboard.html?role=${role}`;
         }, 1500);
       } else {
         showMessage('Login successful!');
         setTimeout(() => {
-          window.location.href = `dashboard.html?role=${role}`;
+          window.location.href = `/dashboard.html?role=${role}`;
         }, 1500);
       }
     } catch (err) {
@@ -232,7 +232,7 @@ if (signinBtn) {
         showMessage('✓ Login successful! Redirecting...');
         
         setTimeout(() => {
-          window.location.href = `dashboard.html?role=${role}`;
+          window.location.href = `/dashboard.html?role=${role}`;
         }, 1500);
       } else {
         showMessage('Invalid username or password', true);
