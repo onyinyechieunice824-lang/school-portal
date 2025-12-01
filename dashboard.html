@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - SchoolPortal</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/feather-icons"></script>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    :root {
+      --primary: #667eea;
+      --secondary: #764ba2;
+      --text-primary: #1a202c;
+      --text-secondary: #4a5568;
+      --bg-light: #f8f9fc;
+      --border-color: #e2e8f0;
+      --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-light);
+      color: var(--text-primary);
+    }
+    
+    .dashboard-container {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .dashboard-header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: white;
+      padding: 30px 40px;
+      box-shadow: var(--shadow-md);
+    }
+    
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .logo-section h1 {
+      font-size: 24px;
+      font-weight: 700;
+    }
+    
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    
+    .user-badge {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-weight: 600;
+      text-transform: capitalize;
+    }
+    
+    .logout-btn {
+      background: rgba(255, 255, 255, 0.15);
+      border: 2px solid white;
+      color: white;
+      padding: 10px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-family: inherit;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s;
+    }
+    
+    .logout-btn:hover {
+      background: white;
+      color: var(--primary);
+    }
+    
+    .dashboard-content {
+      flex: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 40px;
+    }
+    
+    .welcome-card {
+      background: white;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: var(--shadow-md);
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    
+    .welcome-card h2 {
+      font-size: 32px;
+      margin-bottom: 10px;
+      color: var(--text-primary);
+    }
+    
+    .welcome-card p {
+      color: var(--text-secondary);
+      font-size: 18px;
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+      margin-bottom: 30px;
+    }
+    
+    .stat-card {
+      background: white;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: var(--shadow-md);
+      border-left: 4px solid var(--primary);
+      transition: transform 0.3s;
+    }
+    
+    .stat-card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .stat-card h3 {
+      font-size: 14px;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+    
+    .stat-card .value {
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--primary);
+    }
+    
+    .quick-actions {
+      background: white;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: var(--shadow-md);
+    }
+    
+    .quick-actions h3 {
+      font-size: 24px;
+      margin-bottom: 24px;
+    }
+    
+    .actions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+    
+    .action-btn {
+      background: var(--bg-light);
+      border: 2px solid var(--border-color);
+      padding: 20px;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+    
+    .action-btn:hover {
+      border-color: var(--primary);
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: white;
+      transform: translateY(-3px);
+    }
+    
+    .action-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .action-btn:hover .action-icon {
+      background: white;
+    }
+    
+    .action-icon svg {
+      stroke: white;
+    }
+    
+    .action-btn:hover .action-icon svg {
+      stroke: var(--primary);
+    }
+    
+    .action-btn span {
+      font-weight: 600;
+    }
+    
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 20px;
+      }
+      
+      .dashboard-content {
+        padding: 20px;
+      }
+      
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard-container">
+    <!-- Header -->
+    <div class="dashboard-header">
+      <div class="header-content">
+        <div class="logo-section">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <rect width="40" height="40" rx="10" fill="white" fill-opacity="0.2"/>
+            <path d="M20 12L28 16V24C28 28 24 30 20 30C16 30 12 28 12 24V16L20 12Z" fill="white"/>
+          </svg>
+          <h1>SchoolPortal Dashboard</h1>
+        </div>
+        
+        <div class="user-info">
+          <div class="user-badge" id="userRole">Loading...</div>
+          <button class="logout-btn" onclick="logout()">
+            <span data-feather="log-out"></span>
+            Logout
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="dashboard-content">
+      <div class="welcome-card">
+        <h2 id="welcomeMessage">Welcome to Your Dashboard</h2>
+        <p id="welcomeSubtext">Manage your academic activities efficiently</p>
+      </div>
+      
+      <div class="stats-grid" id="statsGrid">
+        <!-- Stats will be loaded dynamically -->
+      </div>
+      
+      <div class="quick-actions">
+        <h3>Quick Actions</h3>
+        <div class="actions-grid" id="actionsGrid">
+          <!-- Actions will be loaded dynamically based on role -->
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script>
+    // Get role from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const role = urlParams.get('role') || localStorage.getItem('userRole') || 'student';
+    const username = localStorage.getItem('username') || 'User';
+    
+    // Update UI based on role
+    document.getElementById('userRole').textContent = role.charAt(0).toUpperCase() + role.slice(1);
+    document.getElementById('welcomeMessage').textContent = `Welcome back, ${username}!`;
+    
+    // Role-specific stats
+    const roleStats = {
+      admin: [
+        { label: 'Total Students', value: '1,234' },
+        { label: 'Total Teachers', value: '87' },
+        { label: 'Total Classes', value: '45' },
+        { label: 'Active Sessions', value: '12' }
+      ],
+      teacher: [
+        { label: 'My Classes', value: '6' },
+        { label: 'Total Students', value: '180' },
+        { label: 'Pending Grades', value: '23' },
+        { label: 'Assignments', value: '8' }
+      ],
+      student: [
+        { label: 'My Courses', value: '8' },
+        { label: 'Assignments', value: '5' },
+        { label: 'Average Score', value: '85%' },
+        { label: 'Attendance', value: '92%' }
+      ],
+      parent: [
+        { label: 'Children', value: '2' },
+        { label: 'Pending Fees', value: '₦50,000' },
+        { label: 'Upcoming Events', value: '3' },
+        { label: 'Messages', value: '4' }
+      ]
+    };
+    
+    // Role-specific actions
+    const roleActions = {
+      admin: [
+        { icon: 'users', label: 'Manage Students' },
+        { icon: 'book-open', label: 'Manage Teachers' },
+        { icon: 'calendar', label: 'Timetable' },
+        { icon: 'file-text', label: 'Reports' },
+        { icon: 'settings', label: 'Settings' },
+        { icon: 'credit-card', label: 'Payments' }
+      ],
+      teacher: [
+        { icon: 'users', label: 'My Classes' },
+        { icon: 'edit-3', label: 'Grade Students' },
+        { icon: 'file-plus', label: 'Upload Notes' },
+        { icon: 'clipboard', label: 'Assignments' },
+        { icon: 'calendar', label: 'My Schedule' },
+        { icon: 'message-circle', label: 'Messages' }
+      ],
+      student: [
+        { icon: 'book', label: 'My Courses' },
+        { icon: 'edit', label: 'Take CBT' },
+        { icon: 'file-text', label: 'View Results' },
+        { icon: 'calendar', label: 'Timetable' },
+        { icon: 'download', label: 'Download Notes' },
+        { icon: 'credit-card', label: 'Pay Fees' }
+      ],
+      parent: [
+        { icon: 'user', label: 'Child Progress' },
+        { icon: 'file-text', label: 'View Report Cards' },
+        { icon: 'credit-card', label: 'Pay Fees' },
+        { icon: 'calendar', label: 'Events' },
+        { icon: 'message-circle', label: 'Messages' },
+        { icon: 'bell', label: 'Notifications' }
+      ]
+    };
+    
+    // Load stats
+    const statsGrid = document.getElementById('statsGrid');
+    roleStats[role].forEach(stat => {
+      const card = document.createElement('div');
+      card.className = 'stat-card';
+      card.innerHTML = `
+        <h3>${stat.label}</h3>
+        <div class="value">${stat.value}</div>
+      `;
+      statsGrid.appendChild(card);
+    });
+    
+    // Load actions
+    const actionsGrid = document.getElementById('actionsGrid');
+    roleActions[role].forEach(action => {
+      const btn = document.createElement('div');
+      btn.className = 'action-btn';
+      btn.innerHTML = `
+        <div class="action-icon">
+          <span data-feather="${action.icon}"></span>
+        </div>
+        <span>${action.label}</span>
+      `;
+      actionsGrid.appendChild(btn);
+    });
+    
+    // Initialize feather icons
+    feather.replace();
+    
+    // Logout function
+    function logout() {
+      localStorage.clear();
+      window.location.href = '/';
+    }
+    
+    // Check if user is logged in
+    if (!localStorage.getItem('userRole')) {
+      window.location.href = '/';
+    }
+  </script>
+</body>
+</html>
